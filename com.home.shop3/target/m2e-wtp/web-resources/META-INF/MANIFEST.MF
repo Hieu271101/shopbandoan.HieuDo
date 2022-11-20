@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Built-By: Hieu
+Build-Jdk: 16.0.2
+Implementation-Title: com.home.shop1 Maven Webapp
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: com.home.shop3
+Implementation-URL: http://maven.apache.org
+Created-By: Maven Integration for Eclipse
+
