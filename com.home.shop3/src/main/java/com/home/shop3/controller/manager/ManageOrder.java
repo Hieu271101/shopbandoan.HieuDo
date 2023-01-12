@@ -1,7 +1,11 @@
 package com.home.shop3.controller.manager;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +15,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.poi.xwpf.usermodel.XWPFParagraph;
+import org.apache.poi.xwpf.usermodel.XWPFRun;
+import org.apache.poi.xwpf.usermodel.XWPFTable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -41,8 +50,8 @@ import com.home.shop3.service.user.SaleOrderService;
 
 @Controller
 public class ManageOrder extends BaseController {
-//	@Autowired 
-//	protected OrderService orderService;
+	@Autowired 
+	protected OrderService orderService;
 	
 	@Autowired
 	protected SaleOrderService saleOrderService;
@@ -163,6 +172,107 @@ public class ManageOrder extends BaseController {
 		return ResponseEntity.ok(jsonResult);
 	}
 	
+
+	
+	@RequestMapping(value = { "/ajax/createBill" }, method = RequestMethod.POST)
+	public ResponseEntity<Map<String, Object>> ajax_bill(final Model model, 
+																	   final HttpServletRequest request,
+																	   final HttpServletResponse response, 
+																	   final @RequestBody SaleOrder saleOrder																	 																	  
+																	   ) throws IOException {
+		System.out.print(saleOrder.getId());
+		SaleOrder saleOrderInDbs=saleOrderService.getById(saleOrder.getId());
+		
+		XWPFDocument document = new XWPFDocument();
+
+        // Create a paragraph for the invoice title
+        XWPFParagraph titleParagraph = document.createParagraph();
+        titleParagraph.setAlignment(ParagraphAlignment.CENTER);
+        XWPFRun titleRun = titleParagraph.createRun();
+        titleRun.setBold(true);
+        titleRun.setFontSize(18);
+        titleRun.setText("BILL");
+
+        // Create a paragraph for the invoice date
+        XWPFParagraph dateParagraph = document.createParagraph();
+        dateParagraph.setAlignment(ParagraphAlignment.RIGHT);
+        XWPFRun dateRun = dateParagraph.createRun();
+        dateRun.setText(String.valueOf(saleOrderInDbs.getCreatedDate()));
+
+        // Create a paragraph for the customer information
+        XWPFParagraph customerParagraph = document.createParagraph();
+        XWPFRun customerRun = customerParagraph.createRun();
+        customerRun.setText("Customer Name: "+ saleOrderInDbs.getCustomerName());
+        customerRun.addBreak();
+        customerRun.setText("Address: "+ saleOrder.getCustomerAddress());
+        customerRun.addBreak();
+        customerRun.setText("Email: "+ saleOrder.getCustomerEmail());
+        customerRun.addBreak();
+        customerRun.setText("Phone: "+saleOrder.getCustomerPhone());
+
+        // Create a table for the invoice items
+        XWPFTable itemsTable = document.createTable(3, 3);
+        itemsTable.getRow(0).getCell(0).setText("Item");
+        itemsTable.getRow(0).getCell(1).setText("Quantity");
+        itemsTable.getRow(0).getCell(2).setText("Price");
+        itemsTable.getRow(1).getCell(0).setText("Widget");
+        itemsTable.getRow(1).getCell(1).setText("2");
+        itemsTable.getRow(1).getCell(2).setText("$10.00");
+        itemsTable.getRow(2).getCell(0).setText("Gadget");
+        itemsTable.getRow(2).getCell(1).setText("1");
+        itemsTable.getRow(2).getCell(2).setText("$20.00");
+
+        // Create a paragraph for the total
+        XWPFParagraph totalParagraph = document.createParagraph();
+        XWPFRun totalRun = totalParagraph.createRun();
+        totalRun.setText("Total: $30.00");
+  
+    // Write the Document in file system
+    FileOutputStream out = new FileOutputStream(new File("demo-apache-apoi-word.docx"));
+    System.out.print(new File("demo-apache-apoi-word.docx").getAbsolutePath());
+    document.write(out);
+    out.close();
+    document.close();
+    System.out.println("successully");
+	
+		// trả về kết quả
+		Map<String, Object> jsonResult = new HashMap<String, Object>();
+		jsonResult.put("code", 200);
+		jsonResult.put("status", "TC");
+
+		
+
+		return ResponseEntity.ok(jsonResult);
+	}
+	
+	@RequestMapping(value = { "/ajax/undertakeBill" }, method = RequestMethod.POST)
+	public ResponseEntity<Map<String, Object>> ajax_undertakeBill(final Model model, 
+																	   final HttpServletRequest request,
+																	   final HttpServletResponse response, 
+																	   final @RequestBody SaleOrder saleOrder																	 																	  
+																	   ) throws IOException {
+//		System.out.println(saleOrder.getId());
+//		System.out.println(saleOrder.getUndertake());
+		SaleOrder saleOrderInDbs=saleOrderService.getById(saleOrder.getId());
+		Date date=new Date();
+		date=java.util.Calendar.getInstance().getTime();
+		saleOrderInDbs.setUndertake(saleOrder.getUndertake()+"<br>"+date);
+		
+		saleOrderService.saveOrUpdate(saleOrderInDbs);
+		System.out.println("successully");
+		
+		// trả về kết quả
+		Map<String, Object> jsonResult = new HashMap<String, Object>();
+		jsonResult.put("undertake", saleOrder.getUndertake()+"<br>"+date);
+		jsonResult.put("code", 200);
+		jsonResult.put("status", "TC");
+
+		
+
+		return ResponseEntity.ok(jsonResult);
+	}
+	
+
 	
 //	@RequestMapping(value = { "/admin/order/management/delete" }, method = RequestMethod.POST)
 //	public ResponseEntity<Map<String, Object>> deleteProduct(final Model model, 

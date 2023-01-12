@@ -31,6 +31,8 @@ public class Index extends BaseController  {
 	
 	@Autowired 
 	private ProductsService productsService;
+	
+	
 	@RequestMapping(value="/admin", method =RequestMethod.GET)
 	public String index(final Model model, final HttpServletRequest request, final HttpServletResponse response) throws IOException {
 		List<ProductsEntity> ProductOver=productsService.findNearOver();
@@ -49,7 +51,26 @@ public class Index extends BaseController  {
 //		List<OrderEntity> newOrder=orderService.findNearOrder();
 		List<User> nearUsers=userService.findNearUser();
 		model.addAttribute("nearUsers",nearUsers);
-//		model.addAttribute("newOrder",newOrder);
+		model.addAttribute("dataset","{\r\n"
+				+ "					label : \"Dữ liệu kế tiếp\",\r\n"
+				+ "					backgroundColor : \"rgba(9, 109, 239, 0.651)  \",\r\n"
+				+ "					pointColor : \"rgb(9, 109, 239)\",\r\n"
+				+ "					strokeColor : \"rgb(9, 109, 239)\",\r\n"
+				+ "					pointStrokeColor : \"rgb(9, 109, 239)\",\r\n"
+				+ "					pointHighlightFill : \"rgb(9, 109, 239)\",\r\n"
+				+ "					pointHighlightStroke : \"rgb(9, 109, 239)\",\r\n"
+				+ "					data : [ 48, 48, 49, 39, 86, 10 ]\r\n"
+				+ "				},\r\n"
+				+ "				{\r\n"
+				+ "					label : \"Dữ liệu đầu tiên\",\r\n"
+				+ "					backgroundColor : \"rgba(255, 213, 59, 0.767), 212, 59)\",\r\n"
+				+ "					strokeColor : \"rgb(255, 212, 59)\",\r\n"
+				+ "					pointColor : \"rgb(255, 212, 59)\",\r\n"
+				+ "					pointStrokeColor : \"rgb(255, 212, 59)\",\r\n"
+				+ "					pointHighlightFill : \"rgb(255, 212, 59)\",\r\n"
+				+ "					pointHighlightStroke : \"rgb(255, 212, 59)\",\r\n"
+				+ "					data : [ 20, 59, 90, 51, 56, 100 ]\r\n"
+				+ "					} ");
 		return "common/manager/index";
 	}
 	

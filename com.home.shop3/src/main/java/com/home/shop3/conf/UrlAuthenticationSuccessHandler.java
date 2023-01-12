@@ -20,7 +20,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 /**
  * Class này sẽ kiểm tra Role của User Logined. Nếu guest thì về trang người dùng
  * ngược lại nếu là Admin thì vào trang Admin
- * @author daing
+ * 
  *
  */
 public class UrlAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
@@ -28,8 +28,9 @@ public class UrlAuthenticationSuccessHandler implements AuthenticationSuccessHan
 	private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
 	@Override
-	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
-			Authentication authentication) throws IOException, ServletException {
+	public void onAuthenticationSuccess(HttpServletRequest request,
+										HttpServletResponse response,
+										Authentication authentication) throws IOException, ServletException {
 		handle(request, response, authentication);
 		clearAuthenticationAttributes(request);
 	}

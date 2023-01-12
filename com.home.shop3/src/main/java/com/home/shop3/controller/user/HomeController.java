@@ -29,15 +29,16 @@ import com.home.shop3.entities.admin.ProductsEntity;
 public class HomeController extends BaseController {
 	
 	
-
 	@RequestMapping(value = "/", method=RequestMethod.GET)
 	public String defaultApp(final Model model, final HttpServletRequest request, final HttpServletResponse respose) throws IOException{
 //		Cart gioHang=taoGioHang();
 //		HttpSession session= request.getSession();
 //		session.setAttribute("giohang", gioHang);
 		
+//		String x="3a";
+//		Double.parseDouble(x);
 		
-		return "common/user/home";
+		return "common/user/home_new";
 	}
 	
 	@RequestMapping(value = "/home", method=RequestMethod.GET)
@@ -47,7 +48,7 @@ public class HomeController extends BaseController {
 //		session.setAttribute("giohang", gioHang);
 
 
-		return "common/user/home";
+		return "common/user/home_new";
 	}
 	@RequestMapping(value="/home", method=RequestMethod.POST)
 	public String contact(final Model model, final HttpServletRequest request,final HttpServletResponse response,@ModelAttribute("newAccount") ProductsEntity newProduct ) throws IOException {

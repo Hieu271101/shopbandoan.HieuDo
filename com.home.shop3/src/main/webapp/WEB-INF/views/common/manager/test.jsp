@@ -14,6 +14,9 @@
 <script src="/manager/js/bootstrap.min.js"></script>
 </head>
 <body>
+	<div id="chart">
+		
+	</div>
 	<form>
 		<div class="modal-body">
 			<div class="row">

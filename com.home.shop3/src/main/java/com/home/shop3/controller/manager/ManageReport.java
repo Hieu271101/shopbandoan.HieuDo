@@ -64,7 +64,8 @@ public class ManageReport extends BaseController  {
 		
 		List<ProductsEntity> listHotProduct=productsService.findHotProduct();
 		model.addAttribute("listHotProduct",listHotProduct);
-		
+		model.addAttribute("datasetBefore","20, 59, 90, 51, 56, 100, 40, 60, 78, 53, 33, 81");
+		model.addAttribute("datasetAfter","48, 48, 49, 39, 86, 10, 50, 70, 60, 70, 75, 90");
 		return "common/manager/manageReport";
 	}
 	

@@ -72,7 +72,18 @@ public class SaleOrder extends BaseEntity {
 	
 	
 	
+	@Column(name="undertake")
+	private String undertake;
 	
+	
+	
+	public String getUndertake() {
+		return undertake;
+	}
+
+	public void setUndertake(String undertake) {
+		this.undertake = undertake;
+	}
 	public String getDescription() {
 		return description;
 	}

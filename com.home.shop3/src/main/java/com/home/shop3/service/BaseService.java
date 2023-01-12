@@ -22,7 +22,7 @@ import com.home.shop3.entities.BaseEntity;
 @Service
 public abstract class BaseService<E extends BaseEntity> {
 	
-	private static int SIZE_OF_PAGE = 12;
+	private static int SIZE_OF_PAGE = 10;
 	public static int NO_PAGING = 1;
 	
 	@PersistenceContext
@@ -72,9 +72,7 @@ public abstract class BaseService<E extends BaseEntity> {
 	@SuppressWarnings("unchecked")
 	public PagerData<E> getEntitiesByNativeSQL(String sql, int page) {
 		if(page <= 0) throw new RuntimeException("page phải lớn hơn 0");
-		
 		PagerData<E> result = new PagerData<E>();
-		
 		try {
 			Query query = entityManager.createNativeQuery(sql, clazz());
 			

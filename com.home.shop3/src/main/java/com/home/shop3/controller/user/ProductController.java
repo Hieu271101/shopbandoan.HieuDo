@@ -1,9 +1,10 @@
 package com.home.shop3.controller.user;
 
-import java.io.IOException;
+import java.io.IOException; 
 import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -45,18 +46,8 @@ public class ProductController extends BaseController  {
 	@Autowired
 	CategoryService categoryService;
 	
-//	@RequestMapping(value="/product",method=RequestMethod.GET)
-//	public String cart(final Model model, final HttpServletRequest request, final HttpServletResponse response) throws IOException{
-//		
-//		
-//		
-//		List<ProductsEntity> products=productsService.findAllActive();
-//		
-//		model.addAttribute("products",products);
-//		
-//		return "common/user/product";
-//	}
-	
+
+	// 
 	@RequestMapping(value = { "/product/{productId}" }, method = RequestMethod.GET)
 	public String adminProductDetail(final Model model, 
 								   final HttpServletRequest request,
@@ -82,11 +73,12 @@ public class ProductController extends BaseController  {
 	
 	
 	@RequestMapping(value="/product/{productId}",method=RequestMethod.POST)
-	public ResponseEntity< Map<String, Object>> addToCart(final Model model,
+	public ResponseEntity< Map<String, Object>> addToCart(
+			final Model model,
 			final HttpServletRequest request, 
 			final HttpServletResponse response,
-		@ModelAttribute("Product") ProductsEntity newProduct,
-		@RequestBody CartItems newItem)throws IOException{
+			@ModelAttribute("Product") ProductsEntity newProduct,
+			@RequestBody CartItems newItem)throws IOException{
 		
 //		ProductsEntity productInDatabase = productsService.getById(productId);
 		
@@ -111,16 +103,23 @@ public class ProductController extends BaseController  {
 		for(CartItems ci : cartItems) {
 			total = total.add(ci.getPriceUnit().multiply(BigDecimal.valueOf(ci.getQuanlity()+1)));
 		}
-
 		cart.setTotalPrice(total);
 		
 		
 		boolean isExist=false;
-		
+		BigDecimal itemTotalPrice=BigDecimal.ZERO;
+//		itemTotalPrice.add(itemTotalPrice)
 		for(CartItems item:cartItems) {
 			if(item.getProductId()==newItem.getProductId()) {
 				isExist=true;
 				item.setQuanlity(item.getQuanlity()+newItem.getQuanlity());
+				
+//				item.setToltalPriceItem(itemTotalPrice.add(BigDecimal.valueOf(item.getQuanlity()).multiply(newItem.getPriceUnit()))) ;
+			}
+		}
+		for(CartItems ci:cartItems) {
+			if(ci.getProductId()==newItem.getProductId()) {
+				ci.setToltalPriceItem(ci.getPriceUnit().multiply(BigDecimal.valueOf(ci.getQuanlity())));
 			}
 		}
 		
@@ -130,11 +129,9 @@ public class ProductController extends BaseController  {
 			newItem.setProductName(productInDb.getName());
 			newItem.setPriceUnit(productInDb.getPrice());
 			newItem.setAvatar(productInDb.getAvatar());
+//			newItem.setToltalPriceItem(BigDecimal.valueOf(cartItems.).multiply(newItem.getPriceUnit()));
 			cart.getCartItems().add(newItem);
 		}
-		
-		
-		
 		
 		Map<String, Object>jsonResult=new HashMap<String, Object>();
 		jsonResult.put("code", 200);
@@ -199,31 +196,6 @@ public class ProductController extends BaseController  {
 		return total;
 	}
 	
-//	@RequestMapping(value="/product/{productId}",method=RequestMethod.GET)
-//	public String detailProduct(final Model model, final HttpServletRequest request, final HttpServletResponse response,   @PathVariable("productId") int productId) throws IOException{
-//		
-//		ProductsEntity productInDatabase = productsService.getById(productId);
-//		model.addAttribute("Product", productInDatabase);
-//		
-//		
-//		
-//		return "common/user/detail_product";
-//	}
-//	@RequestMapping(value="/cart",method=RequestMethod.POST)
-//	public String adminProductAddOrUpdate(final Model model, 
-//										  final HttpServletRequest request,
-//										  final HttpServletResponse response, 
-//										  @ModelAttribute("Product") ProductsEntity product
-//
-//									
-//	) throws Exception {
-//
-//	
-//		
-//
-//		return "redirect:";
-//
-//	}
 	
 	@RequestMapping(value = { "/product" }, method = RequestMethod.GET)
 	public String ProductList(final Model model, final HttpServletRequest request,
@@ -234,7 +206,7 @@ public class ProductController extends BaseController  {
 		
 		
 		String keyword = request.getParameter("keyword");
-		Integer categoryId = getInteger(request, "categoryId");
+		Integer categoryId = getInteger(request, "banhkem");
 
 		ProductSearchModel searchModel = new ProductSearchModel();
 		searchModel.setKeyword(keyword);
@@ -245,7 +217,7 @@ public class ProductController extends BaseController  {
 		
 		model.addAttribute("products", products);
 		model.addAttribute("searchModel", searchModel);
-		return "common/user/product";
+		return "common/user/product_new";
 		
 	}
 

@@ -1,10 +1,14 @@
 package com.home.shop3.service.user;
 
+import java.util.Date;
 //import java.util.ArrayList;  
-import java.util.List; 
+import java.util.List;
+
+import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
-
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 
 import com.home.shop3.entities.user.User;
 import com.home.shop3.service.BaseService;
@@ -17,6 +21,22 @@ public class UserService extends BaseService<User> {
 	protected Class<User> clazz(){
 			return User.class;
 	}
+	@Transactional
+	public User saveOrUpdate( User entity, BindingResult result ) {
+		if(result.hasErrors()) {
+			
+		}else {
+			if (entity.getId() == null || entity.getId() <= 0) {
+				entity.setCreatedDate(new Date());
+				entityManager.persist(entity); // thêm mới
+				return entity;
+			} else {
+				return entityManager.merge(entity); // cập nhật
+			}
+		}
+		return entity;
+	} 
+	
 	public List<User> findActiveUser(){
 		String sql="SELECT *FROM tbl_users where status=1 ";
 		return super.executeNativeSql(sql);
@@ -33,7 +53,12 @@ public class UserService extends BaseService<User> {
 	}
 	
 	public List<User> findNotAdmin(){
-		String sql="SELECT * FROM tbl_users where status=1 and  exists(select * from `tbl_users_roles` where `tbl_users`.id =`tbl_users_roles`.user_id and `tbl_users_roles`.role_id=2 )";
+		String sql="SELECT * FROM tbl_users where   exists(select * from `tbl_users_roles` where `tbl_users`.id =`tbl_users_roles`.user_id and `tbl_users_roles`.role_id=2 )";
+		return super.executeNativeSql(sql);
+	}
+	
+	public List<User> findIsAdmin(){
+		String sql="SELECT * FROM tbl_users where not  exists(select * from `tbl_users_roles` where `tbl_users`.id =`tbl_users_roles`.user_id and `tbl_users_roles`.role_id=2 )";
 		return super.executeNativeSql(sql);
 	}
 	

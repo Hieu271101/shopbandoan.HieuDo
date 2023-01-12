@@ -1,8 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="${base}/manager/css/main.css">
 
 </head>
-<body onload="time()" class="app sidebar-mini rtl">
+<body  class="app sidebar-mini rtl">
     <!-- Navbar-->
     <header class="app-header">
       <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar"
@@ -44,6 +44,10 @@
               class="app-menu__label">Bảng điều khiển</span></a></li>
         <li><a class="app-menu__item " href="${base }/admin/employee"><i class='app-menu__icon bx bx-id-card'></i> <span
               class="app-menu__label">Quản lý nhân viên</span></a></li>
+        <li><a class="app-menu__item"
+				href="${base }/admin/admin1"><i
+					class='app-menu__icon bx bx-id-card'></i> <span
+					class="app-menu__label">Quản lý Admin</span></a></li>
         <li><a class="app-menu__item" href="${base }/admin/user"><i class='app-menu__icon bx bx-user-voice'></i><span
               class="app-menu__label">Quản lý khách hàng</span></a></li>
         <li><a class="app-menu__item" href="${base }/admin/product"><i
@@ -145,128 +149,9 @@
               </div>
           </div>
           <div class="row">
-              <!-- <div class="col-md-12">
-                  <div class="tile">
-                      <div>
-                          <h3 class="tile-title">SẢN PHẨM BÁN CHẠY</h3>
-                      </div>
-                      <div class="tile-body">
-                          <table class="table table-hover table-bordered" id="sampleTable">
-                              <thead>
-                                  <tr>
-                                      <th>Mã sản phẩm</th>
-                                      <th>Tên sản phẩm</th>
-                                      <th>Giá tiền</th>
-                                      <th>Danh mục</th>
-                                  </tr>
-                              </thead>
-                              <tbody>
-                                  <tr>
-                                      <td>71309005</td>
-                                      <td>Bàn ăn gỗ Theresa</td>
-                                      <td>5.600.000 đ</td>
-                                      <td>Bàn ăn</td>
-                                  </tr>
-                                  <tr>
-                                      <td>62304003</td>
-                                      <td>Bàn ăn Vitali mặt đá</td>
-                                      <td>33.235.000 đ</td>
-                                      <td>Bàn ăn</td>
-                                  </tr>
-                                  <tr>
-                                      <td>72109004</td>
-                                      <td>Ghế làm việc Zuno</td>
-                                      <td>3.800.000 đ</td>
-                                      <td>Ghế gỗ</td>
-                                  </tr>
-                                  <tr>
-                                      <td>83826226</td>
-                                      <td>Tủ ly - tủ bát</td>
-                                      <td>2.450.000 đ</td>
-                                      <td>Tủ</td>
-                                  </tr>
-                                  <tr>
-                                      <td>71304041</td>
-                                      <td>Bàn ăn mở rộng Vegas</td>
-                                      <td>21.550.000 đ</td>
-                                      <td>Bàn thông minh</td>
-                                  </tr>
-                              </tbody>
-                          </table>
-                      </div>
-                  </div>
-              </div> -->
+             
           </div>
-         <!--  <div class="row">
-                  <div class="col-md-12">
-                      <div class="tile">
-                          <div>
-                              <h3 class="tile-title">TỔNG ĐƠN HÀNG</h3>
-                          </div>
-                          <div class="tile-body">
-                              <table class="table table-hover table-bordered" id="sampleTable">
-                                  <thead>
-                                      <tr>
-                                              <th>ID đơn hàng</th>
-                                              <th>Khách hàng</th>
-                                              <th>Đơn hàng</th>
-                                              <th>Số lượng</th>
-                                              <th>Tổng tiền</th>
-                                      </tr>
-                                  </thead>
-                                  <tbody>
-                                      <tr>
-                                              <td>MD0837</td>
-                                              <td>Triệu Thanh Phú</td>
-                                              <td>Ghế làm việc Zuno, Bàn ăn gỗ Theresa</td>
-                                              <td>2 sản phẩm</td>
-                                              <td>9.400.000 đ</td>
-                                      </tr>
-                                      <tr>
-                                              <td>MĐ8265</td>
-                                              <td>Nguyễn Thị Ngọc Cẩm</td>
-                                              <td>Ghế ăn gỗ Lucy màu trắng</td>
-                                              <td>1 sản phẩm</td>
-                                              <td>3.800.000 đ</td>   
-                                      </tr>
-                                      <tr>
-                                              <td>MT9835</td>
-                                              <td>Đặng Hoàng Phúc</td>
-                                              <td>Giường ngủ Jimmy, Bàn ăn mở rộng cao cấp Dolas, Ghế làm việc Zuno</td>
-                                              <td>3 sản phẩm</td>
-                                              <td>40.650.000 đ</td>
-                                      </tr>
-                                      <tr>
-                                              <td>ER3835</td>
-                                              <td>Nguyễn Thị Mỹ Yến</td>
-                                              <td>Bàn ăn mở rộng Gepa</td>
-                                              <td>1 sản phẩm</td>
-                                              <td>16.770.000 đ</td>
-                                      </tr>
-                                      <tr>
-                                              <td>AL3947</td>
-                                              <td>Phạm Thị Ngọc</td>
-                                              <td>Bàn ăn Vitali mặt đá, Ghế ăn gỗ Lucy màu trắng</td>
-                                              <td>2 sản phẩm</td>
-                                              <td>19.770.000 đ</td>
-                                      </tr>
-                                      <tr>
-                                              <td>QY8723</td>
-                                              <td>Ngô Thái An</td>
-                                              <td>Giường ngủ Kara 1.6x2m</td>
-                                              <td>1 sản phẩm</td>
-                                              <td>14.500.000 đ</td>
-                                      </tr>
-                                      <tr>
-                                         <th colspan="4">Tổng cộng:</th>
-                                          <td>104.890.000 đ</td>
-                                      </tr>
-                                  </tbody>
-                              </table>
-                          </div>
-                      </div>
-                  </div>
-              </div> -->
+        
           <div class="row">
                   <div class="col-md-12">
                       <div class="tile">
@@ -291,7 +176,8 @@
                                   		 <tr>
                                               <td>${over.id }</td>
                                               <td>${over.name }</td>
-                                              <td><img src="/img-sanpham/tu.jpg" alt="" width="100px;"></td>
+                                            <!--   <td><img src="/img-sanpham/tu.jpg" alt="" width="100px;"></td> -->
+                                              <td><img src="#" alt="" width="100px;"></td>
                                               <td>${over.amount }</td>
                                               <td><span class="badge bg-danger">Hết hàng</span></td>
                                               <td>${over.price } đ</td>
@@ -333,30 +219,7 @@
                                       <td>${nearEmployee.position.name }</td>
                                  	 </tr>
                               	</c:forEach>
-                                 <!--  <tr>
-                                      <td>Hồ Thị Thanh Ngân</td>
-                                      <td>155-157 Trần Quốc Thảo, Quận 3, Hồ Chí Minh </td>
-                                      <td>12/02/1999</td>
-                                      <td>Nữ</td>
-                                      <td>0926737168</td>
-                                      <td>Bán hàng</td>
-                                  </tr>
-                                  <tr>
-                                      <td>Trần Khả Ái</td>
-                                      <td>6 Nguyễn Lương Bằng, Tân Phú, Quận 7, Hồ Chí Minh</td>
-                                      <td>22/12/1999</td>
-                                      <td>Nữ</td>
-                                      <td>0931342432</td>
-                                      <td>Bán hàng</td>
-                                  </tr>
-                                  <tr>
-                                      <td>Nguyễn Đặng Trọng Nhân</td>
-                                      <td>59C Nguyễn Đình Chiểu, Quận 3, Hồ Chí Minh </td>
-                                      <td>23/07/1996</td>
-                                      <td>Nam</td>
-                                      <td>0846881155</td>
-                                      <td>Dịch vụ</td>
-                                  </tr> -->
+                               
                               </tbody>
                           </table>
                       </div>
@@ -382,19 +245,20 @@
               </div>
           </div>
   
-          <div class="text-right" style="font-size: 12px">
-              <p><b>Hệ thống quản lý V2.0 | Code by Trường</b></p>
-          </div>
+          
       </main>
       <!-- Essential javascripts for application to work-->
-      <script src="js/jquery-3.2.1.min.js"></script>
-      <script src="js/popper.min.js"></script>
-      <script src="js/bootstrap.min.js"></script>
-      <script src="js/main.js"></script>
+    <!--   <script src="js/jquery-3.2.1.min.js"></script> -->
+     <!--  <script src="js/popper.min.js"></script> -->
+      <!-- <script src="js/bootstrap.min.js"></script> -->
+     <!--  <script src="js/main.js"></script> -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.bundle.js" integrity="sha512-zO8oeHCxetPn1Hd9PdDleg5Tw1bAaP0YmNvPY8CwcRyUk7d7/+nyElmFrB6f7vg4f7Fv4sui1mcep8RIEShczg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+      
       <!-- The javascript plugin to display page loading on top-->
-      <script src="js/plugins/pace.min.js"></script>
+     <!--  <script src="js/plugins/pace.min.js"></script> -->
       <!-- Page specific javascripts-->
-      <script type="text/javascript" src="js/plugins/chart.js"></script>
+     <!--  <script type="text/javascript" src="js/plugins/chart.js"></script> -->
       <script type="text/javascript">
       var data = {
         labels: ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"],
@@ -406,7 +270,8 @@
             pointStrokeColor: "#fff",
             pointHighlightFill: "#fff",
             pointHighlightStroke: "green",
-            data: [20, 59, 90, 51, 56, 100, 40, 60, 78, 53, 33, 81]
+          /*   data: [20, 59, 90, 51, 56, 100, 40, 60, 78, 53, 33, 81] */
+          data: [${datasetBefore}]
           },
           {
             label: "Dữ liệu kế tiếp",
@@ -416,20 +281,89 @@
             pointStrokeColor: "#fff",
             pointHighlightFill: "#fff",
             pointHighlightStroke: "green",
-            data: [48, 48, 49, 39, 86, 10, 50, 70, 60, 70, 75, 90]
+            data: [${datasetAfter}]
           }
         ]
       };
   
   
           var ctxl = $("#lineChartDemo").get(0).getContext("2d");
-          var lineChart = new Chart(ctxl).Line(data);
-  
+          var lineChart=new Chart(ctxl,{
+  			type:'line',
+  			data:{
+  				labels: ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"],
+  			
+  			datasets : [{
+  	            label: "Dữ liệu đầu tiên",
+  	          backgroundColor : "rgba(9, 109, 239, 0.651)  ",
+				pointColor : "rgb(9, 109, 239)",
+				strokeColor : "rgb(9, 109, 239)",
+				pointStrokeColor : "rgb(9, 109, 239)",
+				pointHighlightFill : "rgb(9, 109, 239)",
+				pointHighlightStroke : "rgb(9, 109, 239)",
+  	          /*   data: [20, 59, 90, 51, 56, 100, 40, 60, 78, 53, 33, 81] */
+  	          data: [${datasetBefore}]
+  	          },
+  	          
+  	          {
+  	            label: "Dữ liệu kế tiếp",
+  	          backgroundColor : "rgba(255, 213, 59, 0.767), 212, 59)",
+				strokeColor : "rgb(255, 212, 59)",
+				pointColor : "rgb(255, 212, 59)",
+				pointStrokeColor : "rgb(255, 212, 59)",
+				pointHighlightFill : "rgb(255, 212, 59)",
+				pointHighlightStroke : "rgb(255, 212, 59)",
+  	            data: [${datasetAfter}]
+  	          }
+  	        ],
+  			},
+  		});
+         /*  var lineChart = new Chart(ctxl).Line(data);
+  	*/
           var ctxb = $("#barChartDemo").get(0).getContext("2d");
-          var barChart = new Chart(ctxb).Bar(data);
+          var barChart = new Chart(ctxb,{/* {
+        	  type:'bar',
+        	  label: "Dữ liệu đầu tiên",
+        	  fillColor: "rgba(220,220,220,0.5)", 
+              strokeColor: "rgba(220,220,220,0.8)", 
+              highlightFill: "rgba(220,220,220,0.75)",
+              highlightStroke: "rgba(220,220,220,1)",
+              data: [20, 59, 80, 81, 56, 55, 40]
+          } */ 
+          	type: 'bar',
+  			data:{
+  				labels: ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5",
+  					"Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"],
+  			
+  			datasets : [{
+  	            label: "Dữ liệu đầu tiên",
+  	          backgroundColor : "rgba(9, 109, 239, 0.651)  ",
+				pointColor : "rgb(9, 109, 239)",
+				strokeColor : "rgb(9, 109, 239)",
+				pointStrokeColor : "rgb(9, 109, 239)",
+				pointHighlightFill : "rgb(9, 109, 239)",
+				pointHighlightStroke : "rgb(9, 109, 239)",
+  	          /*   data: [20, 59, 90, 51, 56, 100, 40, 60, 78, 53, 33, 81] */
+  	          data: [${datasetBefore}]
+  	          },
+  	          
+  	          {
+  	            label: "Dữ liệu kế tiếp",
+  	          backgroundColor : "rgba(255, 213, 59, 0.767), 212, 59)",
+				strokeColor : "rgb(255, 212, 59)",
+				pointColor : "rgb(255, 212, 59)",
+				pointStrokeColor : "rgb(255, 212, 59)",
+				pointHighlightFill : "rgb(255, 212, 59)",
+				pointHighlightStroke : "rgb(255, 212, 59)",
+  	            data: [${datasetAfter}]
+  	          }
+  	        ],
+  			},
+          
+          }); 
       </script>
       <!-- Google analytics script-->
-      <script type="text/javascript">
+     <!--  <script type="text/javascript">
           if (document.location.hostname == 'pratikborsadiya.in') {
               (function (i, s, o, g, r, a, m) {
                   i['GoogleAnalyticsObject'] = r;
@@ -445,7 +379,7 @@
               ga('create', 'UA-72504830-1', 'auto');
               ga('send', 'pageview');
           }
-      </script>
+      </script> -->
   </body>
   <style>
     .app-content {

@@ -62,8 +62,8 @@ public class OrderEntity extends BaseEntity {
 	@Column(name="status_order")
 	private String statusOfOrder;
 	
-	
-	
+
+
 	public String getStatusOfOrder() {
 		return statusOfOrder;
 	}

@@ -18,7 +18,12 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 //import javax.persistence.OneToMany;s
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.Length;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -35,12 +40,22 @@ public class User extends BaseEntity implements UserDetails {
 //	@Column(name = "id")
 //	private Integer id;
 	
+	@NotBlank(message = "User Name is compulsory")
 	@Column(name="username")
 	private String userName;
-	
+	@NotBlank(message = "Password is compulsory")
+	@Length(min = 4, message = "Password min 4 digits")
 	@Column(name="password")
 	private String password;
 	
+//	@NotBlank(message = "Re-Password is compulsory")
+//	private String rpassword;
+//	public String getRpassword() {
+//		return rpassword;
+//	}
+//	public void setRpassword(String rpassword) {
+//		this.rpassword = rpassword;
+//	}
 	
 	
 	@Column(name="created_date")
@@ -81,9 +96,11 @@ public class User extends BaseEntity implements UserDetails {
 //	private Set<Orders> orders=new HashSet<Orders>();
 	
 	
+	
 	public String getEmail() {
 		return email;
 	}
+	
 	public void setEmail(String email) {
 		this.email = email;
 	}
@@ -193,7 +210,7 @@ public class User extends BaseEntity implements UserDetails {
 	@Override
 	public String getUsername() {
 		// TODO Auto-generated method stub
-		return null;
+		return userName;
 	}
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

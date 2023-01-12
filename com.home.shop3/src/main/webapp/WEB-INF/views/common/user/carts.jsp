@@ -106,13 +106,13 @@
 										<div class="info">
 											<h2 class="proct_name">${ci.productName }</h2>
 											<div class="origin">Mã sản phẩm: ${ci.productId }</div>
-
+											
 											<fmt:setLocale value="vi_VN" />
 											<span class="text-muted text-decoration-line-through">
 												<fmt:formatNumber value="${ci.priceUnit}" type="currency" />
 												đ
 											</span>
-
+											<div id="totalPriceItem_${ci.productId}">Price:$ ${ci.toltalPriceItem } </div>
 											<!-- <div class="price">$${ci.priceUnit }đ</div> -->
 										</div>
 									</div>
@@ -131,6 +131,7 @@
 												class="plus">+</button>
 											<button type="button" data-price="${ci.priceUnit }"
 												class="mute">-</button> --%>
+												<%-- <span id="totalPriceItem_${ci.productId}"></span> --%>
 
 										</div>
 										<!-- <div class="total_1_sp">Tổng: $${ci.priceUnit }</div> -->
@@ -309,7 +310,7 @@ function UpdateQuanlityCart(baseUrl, productId, quanlity) {
 			// tăng số lượng sản phẩm trong giỏ hàng trong icon
 			$( "#quanlity_" + productId ).html(jsonResult.currentProductQuality);
 			$( ".totalPrice" ).html(jsonResult.totalPrice);
-			
+			$("#totalPriceItem_"+productId).html("Price:$"+jsonResult.currentPriceItem)+"đ";
 			$( "#tamTinh" ).html(jsonResult.totalPrice);
 		},
 		error: function(jqXhr, textStatus, errorMessage) {

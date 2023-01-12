@@ -56,6 +56,10 @@
 			<li><a class="app-menu__item " href="${base }/admin/employee"><i
 					class='app-menu__icon bx bx-id-card'></i> <span
 					class="app-menu__label">Quản lý nhân viên</span></a></li>
+			<li><a class="app-menu__item"
+				href="${base }/admin/admin1"><i
+					class='app-menu__icon bx bx-id-card'></i> <span
+					class="app-menu__label">Quản lý Admin</span></a></li>
 			<li><a class="app-menu__item" href="/admin/user"><i
 					class='app-menu__icon bx bx-user-voice'></i><span
 					class="app-menu__label">Quản lý khách hàng</span></a></li>
@@ -162,7 +166,9 @@
 									<th>Số lượng</th>
 									<th>Tổng tiền</th>
 									<th>Tình trạng</th>
+									<th>Người nhận giao</th>
 									<th>Tính năng</th>
+									
 								</tr>
 							</thead>
 
@@ -172,18 +178,16 @@
 										<td width="10"><input type="checkbox" name="check1"
 											value="1"></td>
 										<td>${order.code }</td>
-
 										<td>${order.customerName }</td>
-
-
-
 										<td><c:forEach items="${order.saleOrderProducts }"
 												var="product"> ${product.products.name },  </c:forEach></td>
 										<td><c:forEach items="${order.saleOrderProducts }"
 												var="product"> ${product.quanlity } </c:forEach></td>
 										<td>${order.total }</td>
 										<td>${order.description }</td>
-
+										<td> <div class="undertake_${order.id }"> ${order.undertake }</div> 
+											
+										</td>
 										<td>
 											<%-- <a class="btn btn-primary btn-sm trash" role="button" onclick="DeleteProduct(${product.id});">Đã giao/Hủy</a> --%>
 											<!--  <button class="btn btn-primary btn-sm trash" type="button" title="Xóa"><i class="fas fa-trash-alt"></i>Đã giao/Hủy </button> -->
@@ -191,7 +195,20 @@
 													class="btn btn-primary btn-sm edit" type="button"
 													title="Sửa">
 													<i class="fa fa-edit"></i> Chi tiết
-												</button></a>
+												</button>
+												</a>
+										 <c:if test="${isAdmin1 }">
+											 <button 
+													
+													onclick="undertakeBill('${base }','${order.id}', '${userLogined.name }')"
+													class="btn btn-alert btn-sm edit" 
+													type="button">
+													 <i class="fa fa-edit"></i>
+													 Nhận giao
+												</button> 
+											 </c:if>
+											 
+											
 										</td>
 									</tr>
 								</c:forEach>
@@ -230,7 +247,7 @@
 	    $('#paging').pagination({
 	    	currentPage:${orders.currentPage},
 	        items: ${orders.totalItems},
-	        itemsOnPage: 3,
+	        itemsOnPage: ${orders.sizeOfPage},
 	        cssStyle: 'light-theme',
 	        onPageClick:function(pageNumber,event){
 	        	$('#page').val(pageNumber);
@@ -296,6 +313,42 @@
 
 				}
 			});
+		}
+		function undertakeBill(baseUrl, productId,name) {
+			
+			if (confirm('Are you sure you want to save this?')) {
+				  // Save it!
+				// javascript object.  data la du lieu ma day len action cua controller
+				let data = {
+					id: productId, // lay theo id	
+					undertake: name
+				};
+
+				// $ === jQuery
+				// json == javascript object
+				jQuery.ajax({
+					url : baseUrl + "/ajax/undertakeBill", //->action
+					type : "post",
+					contentType : "application/json",
+					data : JSON.stringify(data),
+					dataType : "json", // kieu du lieu tra ve tu controller la json
+					success : function(jsonResult) {
+						// sửa người nhận bill
+						
+						$(".undertake_"+productId).html(jsonResult.undertake);
+					},
+					error : function(jqXhr, textStatus, errorMessage) {
+
+					}
+				});
+				} else {
+				  // Do nothing!
+				 
+				}
+			
+			
+			
+			console.log(".undertake_"+productId);
 		}
 
 		function deleteRow(r) {

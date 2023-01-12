@@ -57,6 +57,10 @@
 						<i class="app-menu__icon bx bx-id-card"></i> <span
 						class="app-menu__label">Quản lý nhân viên</span>
 				</a></li>
+				<li><a class="app-menu__item"
+				href="${base }/admin/admin1"><i
+					class='app-menu__icon bx bx-id-card'></i> <span
+					class="app-menu__label">Quản lý Admin</span></a></li>
 				<li><a class="app-menu__item" href="${base }/admin/user"> <i
 						class="app-menu__icon bx bx-user-voice"></i> <span
 						class="app-menu__label">Quản lý khách hàng</span>
@@ -109,7 +113,7 @@
 					 	<input value=${searchModel.page } type="number" placeholder="page" style="display:none;" id="page" name="page" class="form-control">  
 						
 						<input type="text" id="keyword" value="${searchModel.keyword }" name="keyword" class="form-control" placeholder="search">
-						<select class="categoryId" name="categoryId" >
+						<select  class="categoryId"  name="categoryId" >
 							<option value="0">All</option>
 						    <%-- <c:forEach items="${products.data }" var="product">
 								<option value="${product.category.id }"> ${product.category.name } </option>
@@ -243,7 +247,7 @@ $(document).ready(function(){
 	    $('#paging').pagination({
 	    	currentPage:${products.currentPage},
 	        items: ${products.totalItems},
-	        itemsOnPage: 3,
+	        itemsOnPage: ${products.sizeOfPage},
 	        cssStyle: 'light-theme',
 	        onPageClick:function(pageNumber,event){
 	        	$('#page').val(pageNumber);

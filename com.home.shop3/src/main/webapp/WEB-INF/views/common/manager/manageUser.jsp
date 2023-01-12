@@ -49,6 +49,10 @@
 			<li><a class="app-menu__item " href="${base }/admin/employee"><i
 					class='app-menu__icon bx bx-id-card'></i> <span
 					class="app-menu__label">Quản lý nhân viên</span></a></li>
+			<li><a class="app-menu__item"
+				href="${base }/admin/admin1"><i
+					class='app-menu__icon bx bx-id-card'></i> <span
+					class="app-menu__label">Quản lý Admin</span></a></li>
 			<li><a class="app-menu__item active" href="${base }/admin/user"><i
 					class='app-menu__icon bx bx-user-voice'></i><span
 					class="app-menu__label">Quản lý khách hàng</span></a></li>
@@ -140,7 +144,7 @@
 									<th>Ngày sinh</th>
 									<th>Giới tính</th>
 									<th>SĐT</th>
-
+ 									<th>Tình trạng</th>
 									<th width="100">Tính năng</th>
 								</tr>
 							</thead>
@@ -159,16 +163,21 @@
 										<td></td>
 										<td>${user.gender }</td>
 										<td>${user.phone }</td>
-
-										<td><button class="btn btn-primary btn-sm trash"
+										<td>
+										<c:choose>
+												<c:when test="${user.status }">Đang hoạt động</c:when>
+												<c:otherwise>Bị khóa</c:otherwise>
+											</c:choose>										
+										</td>
+											
+										
+										<td>
+											
+											<button class="btn btn-primary btn-sm trash"
 												type="button" title="Xóa" onclick="DeleteUser(${user.id})">
-												<i class="fas fa-trash-alt"></i>Xóa
+												<i class="fas fa-trash-alt"></i>Mở/Khóa tài khoản
 											</button>
-											<a href="${base }/admin/user/management/${user.id}" class="btn btn-primary btn-sm edit" type="button"
-												title="Sửa" id="show-emp" data-toggle="modal"
-												data-target="#ModalUP">
-												<i class="fas fa-edit"></i>Chi tiết
-											</a> 
+											
 										
 											
 											<c:if test="${isAdmin }">
@@ -181,7 +190,11 @@
 											
 
 											</c:if>
-											
+											<a href="${base }/admin/user/management/${user.id}" class="btn btn-primary btn-sm edit" type="button"
+												title="Sửa" id="show-emp" data-toggle="modal"
+												data-target="#ModalUP">
+												<i class="fas fa-edit"></i>Chi tiết
+											</a> 
 											</td>
 												<script type="text/javascript">
 												function ChangeToAdmin(userId) {

@@ -65,9 +65,7 @@ public class SecureConf extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth)throws Exception{
-		auth.userDetailsService(userDetailsService)
-		.passwordEncoder(new BCryptPasswordEncoder(4))
-		;
+		auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder(4));
 	}
 	
 	@Bean

@@ -8,9 +8,19 @@ public class CartItems {
 	private int quanlity;
 	private BigDecimal priceUnit;
 	private int count=0;
+	private BigDecimal toltalPriceItem;
+	
 	private String avatar;
 	
 	
+	public BigDecimal getToltalPriceItem() {
+		return toltalPriceItem;
+	}
+
+	public void setToltalPriceItem(BigDecimal toltalPriceItem) {
+		this.toltalPriceItem = toltalPriceItem;
+	}
+
 	public String getAvatar() {
 		return avatar;
 	}

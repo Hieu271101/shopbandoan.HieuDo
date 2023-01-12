@@ -19,7 +19,7 @@
 </head>
 <body>
 	<header>
-		<div class="container">
+		<div class="containerr">
 			<div class="header">
 
 				<div class="function-bar">
@@ -28,7 +28,7 @@
 					<c:choose>
 						<c:when test="${isLogined }">
 							<c:choose>
-								<c:when test="${isAdmin }">
+								<c:when test="${existIsAdmin }">
 									<div style="margin-right: 30px;">
 
 										<a href="${base }/admin"><i class="fa fa-user"
@@ -36,7 +36,7 @@
 									</div>
 								</c:when>
 							</c:choose>
-							<c:choose>
+							<%-- <c:choose>
 								<c:when test="${isAdmin1 }">
 									<div style="margin-right: 30px;">
 
@@ -44,7 +44,7 @@
 											aria-hidden="true"></i> Trang chủ admin </a>
 									</div>
 								</c:when>
-							</c:choose>
+							</c:choose> --%>
 
 							<div style="margin-right: 30px;">
 
@@ -88,9 +88,13 @@
 					</div>
 					<div class="finding">
 						<!-- <button type="button" class="btn-search"><img src="../images/search.png" alt=""></button> -->
-						<a href="/cart"><span class="count" id="totalCartItemId">
-								${totalItems } </span> <i class="fa-solid fa-cart-shopping"
-							style="color: white; font-size: 25px; cursor: pointer;"></i></a>
+						<a href="/cart">
+						<span class="count" id="totalCartItemId">
+								${totalItems } </span>
+								 <i class="fa-solid fa-cart-shopping"
+							style="color: white; font-size: 25px; cursor: pointer;"></i>
+						
+						</a>
 					</div>
 				</div>
 			</div>
@@ -128,7 +132,7 @@
 	font-size: 20px;
 }
 
-.container {
+.containerr {
 	width: 100%;
 }
 
@@ -183,6 +187,19 @@
 	font-size: 100px;
 	color: white;
 }
-	
+.finding {
+	position: relative;
+}
+.count {
+	position: absolute;
+	right: -30%;
+	top: -60%;
+	color: white;
+	font-size: 15px;
+	background: red;
+	padding: 5px;
+	border-radius: 45px;
+}
+
 </style>
 </html>

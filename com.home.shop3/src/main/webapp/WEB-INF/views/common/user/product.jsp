@@ -64,21 +64,23 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	<div class="aside">
 
-		
-		
-		 <!-- <div id="banh">
-			<form action="" method="get">
-				<input id="banhkem" name="banhkem">
-				<button id="btnsearchbanh" type="submit">click</button>
-			</form>
-		</div>  -->
-		
-		
-		
+
+
+
+
+
+
 		<ul class="categories">
 
 			<li><a href="">Đồ ăn</a></li>
-			<li><a href="">Bánh kem </a></li>
+			<li>
+				<div id="banh">
+					<form action="" method="get">
+						<input hidden="true" id="banhkem" name="banhkem">
+						<button id="btnsearchbanh" style="background: none; border: none; font-size: 17px; cursor: pointer" type="submit">Bánh kem</button>
+					</form>
+				</div>
+			</li>
 			<li><a href="">Vỉa hè</a></li>
 			<li><a href="">Món lẩu</a></li>
 			<li><a href="">Cơm hộp</a></li>
@@ -128,7 +130,7 @@
 
 			</div>
 			<div class="paging">
-				<form action="">
+				<form action="${base }/product" method="get">
 
 					<input id="page" name="page" class="form-control" />
 					<button id="btnSearch" type="submit"></button>
@@ -197,21 +199,13 @@
 </body>
 <script type="text/javascript">
 $(document).ready(function(){
-
-	 /*  $(function() {
-	    $('#banh').pagination({
-	    	currentPage:${products.currentPage},
-	        items: ${products.totalItems},
-	        itemsOnPage: 5,
-	        cssStyle: 'light-theme',
-	        onPageClick:function(pageNumber,event){
-	        	$('#banhkem').val("bánh");
-	        	$('#banhkemsearch').trigger('click'); 
-	        },   
-	    });
-	});
-}); */
-	 
+	   $(function() {
+		   $('#banhkem').val("1");
+     	   $('#banhkemsearch').trigger('click'); 
+		
+});
+ 
+	
 	$(function() {
 	    $('#paging').pagination({
 	    	currentPage:${products.currentPage},

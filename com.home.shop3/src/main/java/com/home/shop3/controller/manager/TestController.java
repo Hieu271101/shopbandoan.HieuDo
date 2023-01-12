@@ -21,11 +21,10 @@ public class TestController {
 	@RequestMapping(value= "/test",method=RequestMethod.GET)
 	public String test(final Model model, final HttpServletRequest request,
 					   final HttpServletResponse response)throws Exception{
-		return "common/manager/test";
+		return "common/user/home_new";
 	}
 	
 	@RequestMapping(value ="/test" , method = RequestMethod.POST)
-
 	public ResponseEntity<Map<String, Object>> ajax_addPosition(final Model model, final HttpServletRequest request,
 			final HttpServletResponse response, final @RequestBody PositionEmployee position) {
 		System.out.println("dcm no co nhan duoc "+ position.getName());

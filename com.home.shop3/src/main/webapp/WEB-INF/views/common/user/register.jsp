@@ -3,6 +3,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,6 +39,7 @@
         </div>
     </div> -->
    <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
+   
     <div class="limiter">
         <div class="container-login100">
             <div class="wrap-login100">
@@ -49,23 +51,33 @@
                     <span class="login100-form-title">
                         <b>ĐĂNG KÝ </b>
                     </span>
+                    <p>${WarningNotification}</p>
                     <!--=====FORM INPUT TÀI KHOẢN VÀ PASSWORD======-->
-                    <sf:form action="" modelAttribute="newAccount">
+                    <sf:form method="post" action="" modelAttribute="newAccount">
+                    	<form:errors path="userName"></form:errors>
                         <div class="wrap-input100 validate-input">
                             <sf:input path="userName" class="input100" type="text" placeholder="Nhập Email Tài khoản" name="username"
                                 id="username"/>
                             <span class="focus-input100"></span>
                           
                         </div>
+                        <form:errors path="password"></form:errors>
                         <div class="wrap-input100 validate-input">
                             <sf:input path="password" autocomplete="off" class="input100" type="password" placeholder="Nhập Mật khẩu"
                                 name="current-password" id="password-field"/>
+                                
                             <!-- <span toggle="#password-field" class="bx fa-fw bx-hide field-icon click-eye"></span>
                             <span class="focus-input100"></span>
                             <span class="symbol-input100">
                                 <i class='bx bx-key'></i>
                             </span> -->
                         </div>
+                         <form:errors name="rpassword"></form:errors>
+                        <div class="wrap-input100 validate-input">
+                            <input  autocomplete="off" class="input100" type="password" placeholder="Nhập Lại Mật khẩu"
+                                 name="rpassword" id="password-field"/>
+                        </div>
+                        
                        <!--  <div class="wrap-input100 validate-input">
                             <input autocomplete="off" class="input100" type="password" placeholder="Nhập Lại Mật khẩu"
                                 name="current-password" id="password-field">

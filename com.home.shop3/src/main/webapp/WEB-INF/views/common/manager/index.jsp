@@ -50,6 +50,10 @@
 			<li><a class="app-menu__item " href="${base }/admin/employee"><i
 					class='app-menu__icon bx bx-id-card'></i> <span
 					class="app-menu__label">Quản lý nhân viên</span></a></li>
+			<li><a class="app-menu__item"
+				href="${base }/admin/admin1"><i
+					class='app-menu__icon bx bx-id-card'></i> <span
+					class="app-menu__label">Quản lý Admin</span></a></li>
 			<li><a class="app-menu__item" href="${base }/admin/user"><i
 					class='app-menu__icon bx bx-user-voice'></i><span
 					class="app-menu__label">Quản lý khách hàng</span></a></li>
@@ -268,7 +272,9 @@
 							<h3 class="tile-title">Dữ liệu 6 tháng đầu vào</h3>
 							<div class="embed-responsive embed-responsive-16by9">
 								<canvas class="embed-responsive-item" id="lineChartDemo"></canvas>
+								
 							</div>
+							
 						</div>
 					</div>
 					<div class="col-md-12">
@@ -313,7 +319,8 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.bundle.js" integrity="sha512-zO8oeHCxetPn1Hd9PdDleg5Tw1bAaP0YmNvPY8CwcRyUk7d7/+nyElmFrB6f7vg4f7Fv4sui1mcep8RIEShczg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<!--===============================================================================================-->
 	<script type="text/javascript">
-		var data = {
+	/* console.log("${ok}"); */
+		/* var data = {
 			labels : [ "Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5",
 					"Tháng 6" ],
 			datasets : [ {
@@ -335,7 +342,7 @@
 				pointHighlightStroke : "rgb(9, 109, 239)",
 				data : [ 48, 48, 49, 39, 86, 10 ]
 			} ]
-		};
+		}; */
 	/* 	var ctxl = $("#lineChartDemo").get(0).getContext("2d"); */
 		/* var lineChart = new Chart(ctxl).Line(data); */
 		var ctxl=document.getElementById("lineChartDemo").getContext("2d");
@@ -344,7 +351,7 @@
 			data:{
 			labels : [ "Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5",
 					"Tháng 6" ],
-			datasets : [ {
+			datasets : [ /* {
 					label : "Dữ liệu kế tiếp",
 					backgroundColor : "rgba(9, 109, 239, 0.651)  ",
 					pointColor : "rgb(9, 109, 239)",
@@ -353,7 +360,8 @@
 					pointHighlightFill : "rgb(9, 109, 239)",
 					pointHighlightStroke : "rgb(9, 109, 239)",
 					data : [ 48, 48, 49, 39, 86, 10 ]
-				},{
+				},
+				{
 					label : "Dữ liệu đầu tiên",
 					backgroundColor : "rgba(255, 213, 59, 0.767), 212, 59)",
 					strokeColor : "rgb(255, 212, 59)",
@@ -362,34 +370,21 @@
 					pointHighlightFill : "rgb(255, 212, 59)",
 					pointHighlightStroke : "rgb(255, 212, 59)",
 					data : [ 20, 59, 90, 51, 56, 100 ]
-					} ],
+					}  */
+					${dataset}
+				],
 			},
 		});
+		
 		var ctxb = $("#barChartDemo").get(0).getContext("2d");
 		var barChart=new Chart(ctxb,{
 			type:'bar',
 			data:{
 			labels : [ "Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5",
 					"Tháng 6" ],
-			datasets : [ {
-					label : "Dữ liệu kế tiếp",
-					backgroundColor : "rgba(9, 109, 239, 0.651)  ",
-					pointColor : "rgb(9, 109, 239)",
-					strokeColor : "rgb(9, 109, 239)",
-					pointStrokeColor : "rgb(9, 109, 239)",
-					pointHighlightFill : "rgb(9, 109, 239)",
-					pointHighlightStroke : "rgb(9, 109, 239)",
-					data : [ 48, 48, 49, 39, 86, 10 ]
-				},{
-					label : "Dữ liệu đầu tiên",
-					backgroundColor : "rgba(255, 213, 59, 0.767), 212, 59)",
-					strokeColor : "rgb(255, 212, 59)",
-					pointColor : "rgb(255, 212, 59)",
-					pointStrokeColor : "rgb(255, 212, 59)",
-					pointHighlightFill : "rgb(255, 212, 59)",
-					pointHighlightStroke : "rgb(255, 212, 59)",
-					data : [ 20, 59, 90, 51, 56, 100 ]
-					} ],
+			datasets : [ 
+					${dataset}
+				],
 			},
 		});
 		/* var barChart = new Chart(ctxb).Bar(data); */

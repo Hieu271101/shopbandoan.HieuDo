@@ -3,6 +3,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,7 +24,7 @@
 	integrity="sha512-+oRH6u1nDGSm3hH8poU85YFIVTdSnS2f+texdPGrURaJh8hzmhMiZrQth6l56P4ZQmxeZzd2DqVEMqQoJ8J89A=="
 	crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
-<body onload="time()" class="app sidebar-mini rtl">
+<body  class="app sidebar-mini rtl">
 	<!-- Navbar-->
 	<header class="app-header">
 		<!-- Sidebar toggle button-->
@@ -53,6 +54,7 @@
 		</div>
 		<hr>
 		<ul class="app-menu">
+			<li>${ahihi }</li>
 			<li><a class="app-menu__item haha" href="phan-mem-ban-hang.html"><i
 					class='app-menu__icon bx bx-cart-alt'></i> <span
 					class="app-menu__label">POS Bán Hàng</span></a></li>
@@ -62,6 +64,10 @@
 			<li><a class="app-menu__item " href="${base }/admin/employee"><i
 					class='app-menu__icon bx bx-id-card'></i> <span
 					class="app-menu__label">Quản lý nhân viên</span></a></li>
+			<li><a class="app-menu__item"
+				href="${base }/admin/admin1"><i
+					class='app-menu__icon bx bx-id-card'></i> <span
+					class="app-menu__label">Quản lý Admin</span></a></li>
 			<li><a class="app-menu__item" href="#"><i
 					class='app-menu__icon bx bx-user-voice'></i><span
 					class="app-menu__label">Quản lý khách hàng</span></a></li>
@@ -100,6 +106,20 @@
 		<div class="tile">
 			<h3 class="tile-title">Tạo mới đơn hàng</h3>
 			<div class="tile-body">
+			<div class="row element-button">
+							<div class="col-sm-2">
+								<button id="exportInvoice" 
+								<%-- onclick="createBill(${newOrder.id})"  --%>
+								
+								class="btn btn-add btn-sm" 
+								data-toggle="modal"
+									data-target="#exampleModalCenter"><b><i
+										class="fas fa-folder-plus"></i> In hóa đơn</b></button>
+							</div>
+							
+						
+
+						</div>
 				<div class="row">
 					<c:forEach items="${newOrder.saleOrderProducts}" var="product">
 
@@ -225,13 +245,13 @@
 		</div>
 	</main>
 	<!-- Essential javascripts for application to work-->
-	<script src="js/jquery-3.2.1.min.js"></script>
+	<!-- <script src="js/jquery-3.2.1.min.js"></script>
 	<script src="js/popper.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
+	<script src="js/bootstrap.min.js"></script> -->
 	<!-- <script src="js/main.js"></script> -->
 	<!-- The javascript plugin to display page loading on top-->
-	<script src="js/plugins/pace.min.js"></script>
-	<script>
+	<!-- <script src="js/plugins/pace.min.js"></script> -->
+<script>
 	
 	/* function UpdateQuanlityCart(baseUrl, productId, quanlity) {
 		
@@ -264,6 +284,27 @@
 		});
 	}
  */	
+ 	/* function createBill(orderId) {
+	  console.log(orderId); 
+		let data={
+				id:orderId
+		};
+		jQuery.ajax({
+			url : "/ajax/createBill",
+			type : "post",
+			contentType : "application/json",
+			data : JSON.stringify(data),
+			dataType : "json", // kieu du lieu tra ve tu controller la json
+			success : function(jsonResult) {
+				
+				alert("Chuc mung! da luu thanh cong dang ki "+jsonResult.statusCode + jsonResult.statusMessage);
+				location.reload();
+			},
+			error : function(jqXhr, textStatus, errorMessage) { // error callback 
+				alert("error");
+			}
+		});
+	} */
 
 	function UpdateQuanlityCart(baseUrl, productId, quanlity) {
 		
@@ -295,5 +336,57 @@
 		});
 	}
 	</script>
+	
+ 	<!-- Xuat hoa don  -->
+ 	<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.2/FileSaver.min.js"></script>
+ <script>
+  // Get a reference to the form element
+  const invoiceForm = document.getElementById('exportInvoice');
+
+  // Add an event listener that will handle the form submission
+  invoiceForm.addEventListener('click', function(event) {
+    // Prevent the form from being submitted
+    event.preventDefault();
+
+    // Get the name and address from the input fields
+   /*  const name = document.getElementById('name-input').value;
+    const address = document.getElementById('address-input').value; */
+
+    // Generate the invoice data
+    const invoiceData = `
+      Invoice
+
+      Code:'${newOrder.code}'
+
+      Name: '${newOrder.customerName}'
+      Address:'${newOrder.customerAddress}'
+      Phone:'${newOrder.customerPhone}'
+	
+    	 
+      Item: Sample Item
+      Price: $10
+      Amount: 5
+      amount of money: $50 
+
+      <c:forEach items="${newOrder.saleOrderProducts}" var="product">
+		
+		Item: '${product.products.name }'
+   	Price: '${product.products.price }'
+   	Amount: '${product.quanlity }'
+    
+	
+	</c:forEach>
+     '------------------------------------------------------------------'
+   	Total: '${newOrder.total} vnđ'
+    `;
+
+    // Create a Blob object containing the invoice data
+    const invoiceBlob = new Blob([invoiceData], { type: 'application/msword' });
+
+    // Use the FileSaver.js saveAs() function to save the invoice as a DOC file
+    saveAs(invoiceBlob, 'invoice.doc');
+  });
+</script>
+ 
 </body>
 </html>

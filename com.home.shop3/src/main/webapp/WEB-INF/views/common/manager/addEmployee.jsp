@@ -54,6 +54,10 @@
 				href="${base }/admin/employee"><i
 					class='app-menu__icon bx bx-id-card'></i> <span
 					class="app-menu__label">Quản lý nhân viên</span></a></li>
+			<li><a class="app-menu__item"
+				href="${base }/admin/admin1"><i
+					class='app-menu__icon bx bx-id-card'></i> <span
+					class="app-menu__label">Quản lý Admin</span></a></li>
 			<li><a class="app-menu__item" href="${base }/admin/user"><i
 					class='app-menu__icon bx bx-user-voice'></i><span
 					class="app-menu__label">Quản lý khách hàng</span></a></li>

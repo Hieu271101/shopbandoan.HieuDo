@@ -34,8 +34,6 @@ public class MVCConf implements WebMvcConfigurer {
 		registry.addResourceHandler("/upload/**").addResourceLocations("file:" + "C:/upload/");
 	}
 	
-	
-	
 	@Bean
 	public ViewResolver viewResolver() {
 		InternalResourceViewResolver bean =new InternalResourceViewResolver();

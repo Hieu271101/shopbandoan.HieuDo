@@ -50,16 +50,16 @@ public class ManageProduct extends BaseController {
 	public String adminProductList(final Model model, final HttpServletRequest request,
 			final HttpServletResponse response) throws IOException {
 		
-		List<CategoryEntity>categories=categoryService.findAll();
+		 List<CategoryEntity>categories=categoryService.findAll();
 		model.addAttribute("categories",categories);
 		
 		
 		String keyword = request.getParameter("keyword");
-		Integer categoryId = getInteger(request, "categoryId");
-
+//		Integer categoryId = getInteger(request, "categoryId");
+		Integer category= getInteger(request, "banhkem");
 		ProductSearchModel searchModel = new ProductSearchModel();
 		searchModel.setKeyword(keyword);
-		searchModel.setCategoryId(categoryId);
+		searchModel.setCategoryId(category);
 		searchModel.setPage(getCurrentPage(request));
 		
 		PagerData<ProductsEntity> products = productsService.searchActive(searchModel);

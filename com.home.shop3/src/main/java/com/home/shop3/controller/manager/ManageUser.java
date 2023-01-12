@@ -117,7 +117,7 @@ public class ManageUser extends BaseController  {
 //		System.out.println(product.getName());
 		
 		User productInDbs=userService.getById(user.getId());
-		productInDbs.setStatus(false);
+		productInDbs.setStatus(!productInDbs.getStatus());
 		userService.saveOrUpdate(productInDbs);
 		
 

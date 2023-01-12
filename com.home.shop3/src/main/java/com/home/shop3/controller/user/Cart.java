@@ -87,7 +87,7 @@ public class Cart extends BaseController {
 			SaleOrderProduct saleOrderProducts = new SaleOrderProduct();
 			saleOrderProducts.setProducts(productsService.getById(cartItem.getProductId()));
 			saleOrderProducts.setQuanlity(cartItem.getQuanlity());
-		
+			
 			// sử dụng hàm tiện ích add hoặc remove đới với các quan hệ onetomany
 			saleOrder.addSaleOrderProducts(saleOrderProducts);
 			total=total+cartItem.getPriceUnit().doubleValue()*cartItem.getQuanlity();
@@ -140,8 +140,15 @@ public class Cart extends BaseController {
 				item.setQuanlity(currentProductQuality);				
 			}
 		}
+		//tính tổng tiền của một Item
+		BigDecimal totalPriceItem=BigDecimal.ZERO;
+		for (CartItems item : cartItems) {
+			if (item.getProductId() == cartItem.getProductId()) {
+				totalPriceItem =totalPriceItem.add(BigDecimal.valueOf(item.getQuanlity()).multiply(item.getPriceUnit()));		
+				item.setToltalPriceItem(totalPriceItem);
+			}
+		}
 		
-
 		// tính tổng tiền
 		this.calculateTotalPrice(request);
 		
@@ -150,9 +157,10 @@ public class Cart extends BaseController {
 		jsonResult.put("code", 200);
 		jsonResult.put("status", "TC");
 		jsonResult.put("totalItems", getTotalItems(request));
+		jsonResult.put("currentPriceItem",formatCurrency(totalPriceItem) ) ;
 		jsonResult.put("currentProductQuality", currentProductQuality);
 		jsonResult.put("totalPrice", formatCurrency(calculateTotalPrice(request)));
-
+		
 		session.setAttribute("totalItems", getTotalItems(request));
 		return ResponseEntity.ok(jsonResult);
 	}

@@ -56,6 +56,13 @@ public class BaseController {
 		return false;
 		
 	}
+	@ModelAttribute("existIsAdmin")
+	public boolean existIsAdmin() {
+		if(isAdmin()||isAdmin1()) {
+			return true;
+		}
+		return false;
+	}
 	
 	
 	@ModelAttribute("isLogined")
